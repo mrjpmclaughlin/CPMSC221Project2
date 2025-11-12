@@ -1,3 +1,5 @@
+package entity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +34,7 @@ public class CustomerDAO implements DAO<Customer>
             rs = stmt.executeQuery();
             Customer customer = null;
             while (rs.next()) {
-                customer = new Customer(rs.getInt("Customer_ID"), rs.getString("Customer_First_Name"), rs.getString("Customer_Last_Name"), rs.getString("Customer_Favorite_Meal"));
+                customer = new Customer(rs.getInt("Customer_ID"), rs.getString("Customer_First_Name"), rs.getString("Customer_Last_Name"), rs.getString("Customer_Email"), rs.getString("Customer_Phone"));
             }
             return Optional.ofNullable(customer);
         } catch (SQLException ex) {
@@ -55,7 +57,7 @@ public class CustomerDAO implements DAO<Customer>
             rs = db.executeQuery(sql);
             Customer customer = null;
             while (rs.next()) {
-                customer = new Customer(rs.getInt("Customer_ID"), rs.getString("Customer_First_Name"), rs.getString("Customer_Last_Name"), rs.getString("Customer_Favorite_Meal"));
+                customer = new Customer(rs.getInt("Customer_ID"), rs.getString("Customer_First_Name"), rs.getString("Customer_Last_Name"), rs.getString("Customer_Email"), rs.getString("Customer_Phone"));
                 customers.add(customer);
             }
             return customers;
@@ -74,12 +76,13 @@ public class CustomerDAO implements DAO<Customer>
     {
         DB db = DB.getInstance();
         try {
-            String sql = "INSERT INTO HD_Customer(Customer_ID, Customer_First_Name, Customer_Last_Name, Customer_Favorite_Meal) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO HD_Customer(Customer_ID, Customer_First_Name, Customer_Last_Name, Email, Phone) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = db.getPreparedStatement(sql);
             stmt.setInt(1, customer.getID());
             stmt.setString(2, customer.getFirstName());
             stmt.setString(3, customer.getLastName());
-            stmt.setString(4, customer.getFavoriteMeal());
+            stmt.setString(4, customer.getEmail());
+            stmt.setString(5, customer.getPhone());
             int rowInserted = stmt.executeUpdate();
             if (rowInserted > 0) {
                 System.out.println("A new customer was inserted successfully!");
@@ -97,12 +100,13 @@ public class CustomerDAO implements DAO<Customer>
     public void update(Customer customer) {
         DB db = DB.getInstance();
         try {
-            String sql = "UPDATE HD_Customer SET Customer_First_Name=?, Customer_Last_Name=?, Customer_Favorite_Meal=? WHERE Customer_ID=?";
+            String sql = "UPDATE HD_Customer SET Customer_First_Name=?, Customer_Last_Name=?, Email=?, Phone=?, WHERE Customer_ID=?";
             PreparedStatement stmt = db.getPreparedStatement(sql);
             stmt.setString(1, customer.getFirstName());
             stmt.setString(2, customer.getLastName());
-            stmt.setString(3, customer.getFavoriteMeal());
-            stmt.setInt(4, customer.getID());
+            stmt.setString(3, customer.getEmail());
+            stmt.setString(4, customer.getPhone());
+            stmt.setInt(5, customer.getID());
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("An existing customer was updated successfully!");

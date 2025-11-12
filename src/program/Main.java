@@ -1,3 +1,4 @@
+package program;
 
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -37,10 +38,12 @@ public class Main extends javax.swing.JFrame {
         jTextFieldCustomerID = new javax.swing.JTextField();
         jTextFieldCustomerFirstName = new javax.swing.JTextField();
         jTextFieldCustomerLastName = new javax.swing.JTextField();
-        jTextFieldCustomerFavoriteMeal = new javax.swing.JTextField();
-        jLabelCustomerFavoriteMeal = new javax.swing.JLabel();
-        jLabelCustomerLastName = new javax.swing.JLabel();
+        jTextFieldCustomerEmail = new javax.swing.JTextField();
+        jLabelCustomerEmail = new javax.swing.JLabel();
+        jTextFieldCustomerPhone = new javax.swing.JTextField();
+        jLabelCustomerPhone = new javax.swing.JLabel();
         jLabelCustomerFirstName = new javax.swing.JLabel();
+        jLabelCustomerLastName = new javax.swing.JLabel();
         jLabelCustomerID = new javax.swing.JLabel();
         jButtonInsertCustomer = new javax.swing.JButton();
         jButtonUpdateCustomer = new javax.swing.JButton();
@@ -73,7 +76,7 @@ public class Main extends javax.swing.JFrame {
 
                 },
                 new String [] {
-                        "ID", "First Name", "Last Name", "Favorite Meal"
+                        "ID", "First Name", "Last Name", "Email", "Phone"
                 }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -95,15 +98,29 @@ public class Main extends javax.swing.JFrame {
             jTableCustomer.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jTextFieldCustomerFavoriteMeal.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCustomerEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCustomerFavoriteMealActionPerformed(evt);
+                jTextFieldCustomerEmailActionPerformed(evt);
             }
+
+
         });
 
-        jLabelCustomerFavoriteMeal.setText("Favorite Meal");
-        jLabelCustomerFavoriteMeal.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabelCustomerFavoriteMeal.setToolTipText("");
+        jTextFieldCustomerPhone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCustomerPhoneActionPerformed(evt);
+            }
+
+
+        });
+
+        jLabelCustomerEmail.setText("Email");
+        jLabelCustomerEmail.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabelCustomerEmail.setToolTipText("");
+
+        jLabelCustomerPhone.setText("Phone");
+        jLabelCustomerPhone.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabelCustomerPhone.setToolTipText("");
 
         jLabelCustomerLastName.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabelCustomerLastName.setText("Last Name");
@@ -160,13 +177,15 @@ public class Main extends javax.swing.JFrame {
                                                         .addComponent(jLabelCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(jLabelCustomerFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(jLabelCustomerLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jLabelCustomerFavoriteMeal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                        .addComponent(jLabelCustomerEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jLabelCustomerPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                         .addComponent(jTextFieldCustomerLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                                                         .addComponent(jTextFieldCustomerFirstName, javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jTextFieldCustomerID, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jTextFieldCustomerFavoriteMeal))))
+                                                        .addComponent(jTextFieldCustomerEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jTextFieldCustomerPhone))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPaneCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(64, 64, 64))
@@ -191,8 +210,12 @@ public class Main extends javax.swing.JFrame {
                                                         .addComponent(jTextFieldCustomerLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(jLabelCustomerFavoriteMeal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jTextFieldCustomerFavoriteMeal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jLabelCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jTextFieldCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jLabelCustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jTextFieldCustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(jButtonUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -477,12 +500,13 @@ public class Main extends javax.swing.JFrame {
             int ID = Integer.parseInt(jTextFieldCustomerID.getText().trim());
             String fName = jTextFieldCustomerLastName.getText().trim();
             String lName = jTextFieldCustomerFirstName.getText().trim();
-            String favoriteMeal = jTextFieldCustomerFavoriteMeal.getText().trim();
+            String email = jTextFieldCustomerEmail.getText().trim();
+            String phone = jTextFieldCustomerPhone.getText().trim();
             Customer customer = getCustomer(ID);
             if(customer.getID() != -1) {
                 int option = JOptionPane.showConfirmDialog(rootPane, "Are you sure you want to Delete?", "Delete confirmation", JOptionPane.YES_NO_OPTION);
                 if(option == 0) {
-                    deleteCustomer(ID, fName, lName, favoriteMeal);
+                    deleteCustomer(ID, fName, lName, email, phone);
                     refreshCustomersTable();
                     clearCustomerTextFields();
                 }
@@ -505,10 +529,11 @@ public class Main extends javax.swing.JFrame {
             int ID = Integer.parseInt(jTextFieldCustomerID.getText().trim());
             String fName = jTextFieldCustomerLastName.getText().trim();
             String lName = jTextFieldCustomerFirstName.getText().trim();
-            String favoriteMeal = jTextFieldCustomerFavoriteMeal.getText().trim();
+            String email = jTextFieldCustomerEmail.getText().trim();
+            String phone = jTextFieldCustomerPhone.getText().trim();
             Customer customer = getCustomer(ID);
             if(customer.getID() != -1) {
-                updateCustomer(ID, fName, lName, favoriteMeal);
+                updateCustomer(ID, fName, lName, email, phone);
                 refreshCustomersTable();
             }
             else
@@ -530,9 +555,10 @@ public class Main extends javax.swing.JFrame {
             int ID = Integer.parseInt(jTextFieldCustomerID.getText().trim());
             String fName = jTextFieldCustomerLastName.getText().trim();
             String lName = jTextFieldCustomerFirstName.getText().trim();
-            String favoriteMeal = jTextFieldCustomerFavoriteMeal.getText().trim();
+            String email = jTextFieldCustomerEmail.getText().trim();
+            String phone = jTextFieldCustomerPhone.getText().trim();
             primaryKeyViolationCustomer(ID);
-            addCustomer(ID, fName, lName, favoriteMeal);
+            addCustomer(ID, fName, lName, email, phone);
             refreshCustomersTable();
             clearCustomerTextFields();
         }
@@ -550,14 +576,17 @@ public class Main extends javax.swing.JFrame {
         jTextFieldCustomerID.setText(model.getValueAt(i, 0).toString());
         jTextFieldCustomerLastName.setText(model.getValueAt(i, 1).toString());
         jTextFieldCustomerFirstName.setText(model.getValueAt(i, 2).toString());
-        jTextFieldCustomerFavoriteMeal.setText(model.getValueAt(i, 3).toString());
+        jTextFieldCustomerEmail.setText(model.getValueAt(i, 3).toString());
+        jTextFieldCustomerPhone.setText(model.getValueAt(i, 4).toString());
     }//GEN-LAST:event_jTableCustomerMouseClicked
 
-    private void jTextFieldCustomerFavoriteMealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCustomerFavoriteMealActionPerformed
+    private void jTextFieldCustomerEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCustomerEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCustomerFavoriteMealActionPerformed
+    }//GEN-LAST:event_jTextFieldCustomerEmailActionPerformed
 
-
+    private void jTextFieldCustomerPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCustomerPhoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCustomerPhoneActionPerformed
 
     //method to show an info alert
     public void alert(String msg) {
@@ -593,27 +622,27 @@ public class Main extends javax.swing.JFrame {
     /**
      * CUSTOMER CRUD FUNCTIONS
      */
-    private static void addCustomer(int id, String firstName, String lastName, String favoriteMeal) {
+    private static void addCustomer(int id, String firstName, String lastName, String email, String phone) {
         Customer customer;
-        customer = new Customer(id, firstName, lastName, favoriteMeal);
+        customer = new Customer(id, firstName, lastName, email, phone);
         customerDAO.insert(customer);
     }
 
-    private static void updateCustomer(int id, String firstName, String lastName, String favoriteMeal) {
+    private static void updateCustomer(int id, String firstName, String lastName, String email, String phone) {
         Customer customer;
-        customer = new Customer(id, firstName, lastName, favoriteMeal);
+        customer = new Customer(id, firstName, lastName, email, phone);
         customerDAO.update(customer);
     }
 
-    private static void deleteCustomer(int id, String firstName, String lastName, String favoriteMeal) {
+    private static void deleteCustomer(int id, String firstName, String lastName, String email, String phone) {
         Customer contact;
-        contact = new Customer(id, firstName, lastName, favoriteMeal);
+        contact = new Customer(id, firstName, lastName, email, phone);
         customerDAO.delete(contact);
     }
 
     static Customer getCustomer(int id) {
         Optional<Customer> customer = customerDAO.get(id);
-        return customer.orElseGet(() -> new Customer(-1, "Non-exist", "Non-exist", "Non-exist"));
+        return customer.orElseGet(() -> new Customer(-1, "Non-exist", "Non-exist", "Non-exist", "Non-exist"));
     }
 
 
@@ -648,7 +677,8 @@ public class Main extends javax.swing.JFrame {
         jTextFieldCustomerID.setText("");
         jTextFieldCustomerLastName.setText("");
         jTextFieldCustomerFirstName.setText("");
-        jTextFieldCustomerFavoriteMeal.setText("");
+        jTextFieldCustomerEmail.setText("");
+        jTextFieldCustomerPhone.setText("");
     }
 
     //method to clear the order txt fields
@@ -672,7 +702,8 @@ public class Main extends javax.swing.JFrame {
             row[0] = customer.getID();
             row[1] = customer.getFirstName();
             row[2] = customer.getLastName();
-            row[3] = customer.getFavoriteMeal();
+            row[3] = customer.getEmail();
+            row[4] = customer.getPhone();
             model.addRow(row);
         }
     }
@@ -743,7 +774,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInsertOrder;
     private javax.swing.JButton jButtonUpdateCustomer;
     private javax.swing.JButton jButtonUpdateOrder;
-    private javax.swing.JLabel jLabelCustomerFavoriteMeal;
+    private javax.swing.JLabel jLabelCustomerEmail;
+    private javax.swing.JLabel jLabelCustomerPhone;
     private javax.swing.JLabel jLabelCustomerFirstName;
     private javax.swing.JLabel jLabelCustomerID;
     private javax.swing.JLabel jLabelCustomerLastName;
@@ -759,7 +791,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPaneHotDogStand;
     private javax.swing.JTable jTableCustomer;
     private javax.swing.JTable jTableOrder;
-    private javax.swing.JTextField jTextFieldCustomerFavoriteMeal;
+    private javax.swing.JTextField jTextFieldCustomerEmail;
+    private javax.swing.JTextField jTextFieldCustomerPhone;
     private javax.swing.JTextField jTextFieldCustomerFirstName;
     private javax.swing.JTextField jTextFieldCustomerID;
     private javax.swing.JTextField jTextFieldCustomerLastName;
