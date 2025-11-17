@@ -20,17 +20,29 @@ public class DB {
     private static final String DB_URL = "jdbc:derby:RestaurantDB;create=true;";
     private static final String MIGRATION_DIR = "db.migrations";
     private static DB instance = null;
-    private final Connection mConnection;
 
-    private DB() throws SQLException
-    {
-        //migrateDb();//Migrate DB first before doing anything
+    private Connection mConnection;
+
+    private DB() throws SQLException {
+
+        // 1. Load Embedded Derby Driver BEFORE Flyway or JDBC is used
+        try {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            System.out.println("Derby EmbeddedDriver successfully loaded!");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("ERROR: Derby Embedded Driver not found in classpath!", e);
+        }
+
+        // 2. Run migrations BEFORE opening main connection
+        migrateDb();
+
+        // 3. Now safely open the main connection
         mConnection = DriverManager.getConnection(DB_URL);
+        System.out.println("Connected to Derby Embedded Database!");
     }
 
     /**
-     * This is the Singleton method that returns only one database instance
-     * @return
+     * Singleton instance
      */
     public static DB getInstance() {
         if (instance == null) {
@@ -41,49 +53,50 @@ public class DB {
                 System.exit(1);
             }
         }
-
         return instance;
     }
 
     /**
-     * Use this method for INSERT, UPDATE, DELETE
-     * @param sql
-     * @return
-     * @throws SQLException
+     * INSERT, UPDATE, DELETE
      */
     public int executeUpdate(String sql) throws SQLException {
         return mConnection.createStatement().executeUpdate(sql);
     }
 
     /**
-     * Use this method to return ResultSet for SELECT SQL queries with no parameters
-     * @param sql
-     * @return
-     * @throws SQLException
+     * SELECT without parameters
      */
     public ResultSet executeQuery(String sql) throws SQLException {
         return mConnection.createStatement().executeQuery(sql);
     }
 
     /**
-     * Use this method to return PreparedStatement for SELECT SQL queries with parameters 
-     * @param sql
-     * @return
-     * @throws SQLException
+     * SELECT with parameters
      */
     public PreparedStatement getPreparedStatement(String sql) throws SQLException {
         return mConnection.prepareStatement(sql);
     }
 
     /**
-     * This migrateDB method is used to create tables under db.migrations package
-     * if they are not created before
-     * We use FlyWay class from flyway library to perform the migration in our code
+     * Run Flyway SQL migrations (table creation, initial data, etc.)
      */
     private void migrateDb() {
-        Flyway flyway = new Flyway();
-        flyway.setDataSource(DB_URL, null, null);//Set the database
-        flyway.setLocations(MIGRATION_DIR);//It will run these SQL scripts under Migration Directory
-        flyway.migrate();//This performs the migration, basically creating tables and inserting values into tables if necessary
+
+        try {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Flyway: Derby driver missing!", e);
+        }
+
+        try {
+            Flyway flyway = new Flyway();
+            flyway.setDataSource(DB_URL, null, null); // embedded mode has no username/password
+            flyway.setLocations(MIGRATION_DIR);       // SQL files go in /src/main/resources/db/migrations or your configured folder
+            flyway.migrate();
+
+            System.out.println("Flyway migration completed successfully!");
+        } catch (Exception e) {
+            throw new RuntimeException("Flyway migration FAILED: " + e.getMessage(), e);
+        }
     }
 }

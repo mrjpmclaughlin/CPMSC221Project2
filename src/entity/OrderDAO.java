@@ -27,13 +27,13 @@ public class OrderDAO implements DAO<Order>
         DB db = DB.getInstance();
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM HD_Order WHERE Order_ID = ?";
+            String sql = "SELECT * FROM ORDERS WHERE Order_ID = ?";
             PreparedStatement stmt = db.getPreparedStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
             Order order = null;
             while (rs.next()) {
-                order = new Order(rs.getInt("Order_ID"), rs.getInt("Order_Price"), rs.getString("Order_Date_Time"), rs.getString("Item_Name"), rs.getInt("Customer_ID"));
+                order = new Order(rs.getInt("Order_ID"), rs.getInt("Order_Price"), rs.getString("Order_Date_Time"));
             }
             return Optional.ofNullable(order);
         } catch (SQLException ex) {
@@ -52,11 +52,11 @@ public class OrderDAO implements DAO<Order>
         ResultSet rs = null;
         orders = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM HD_Order";
+            String sql = "SELECT * FROM ORDERS";
             rs = db.executeQuery(sql);
             Order order = null;
             while (rs.next()) {
-                order = new Order(rs.getInt("Order_ID"), rs.getInt("Order_Price"), rs.getString("Order_Date_Time"), rs.getString("Item_Name"), rs.getInt("Customer_ID"));
+                order = new Order(rs.getInt("Order_ID"), rs.getInt("Order_Price"), rs.getString("Order_Date_Time"));
                 orders.add(order);
             }
             return orders;
@@ -75,13 +75,12 @@ public class OrderDAO implements DAO<Order>
     {
         DB db = DB.getInstance();
         try {
-            String sql = "INSERT INTO HD_Order(Order_ID, Order_Price, Order_Date_Time, Item_Name, Customer_ID) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO ORDERS(Order_ID, Order_Price, Order_Date_Time) VALUES (?, ?, ?)";
             PreparedStatement stmt = db.getPreparedStatement(sql);
             stmt.setInt(1, order.getID());
             stmt.setInt(2, order.getPrice());
             stmt.setString(3, order.getDateTime());
-            stmt.setString(4, order.getItemName());
-            stmt.setInt(5, order.getCustomerID());
+            //stmt.setString(4, order.getItemName());
             int rowInserted = stmt.executeUpdate();
             if (rowInserted > 0) {
                 System.out.println("A new order was inserted successfully!");
@@ -99,13 +98,12 @@ public class OrderDAO implements DAO<Order>
     public void update(Order order) {
         DB db = DB.getInstance();
         try {
-            String sql = "UPDATE HD_Order SET Order_Price=?, Order_Date_Time=?, Item_Name=?, Customer_ID=? WHERE Order_ID=?";
+            String sql = "UPDATE ORDERS SET Order_Price=?, Order_Date_Time=?, Item_Name=?, Customer_ID=? WHERE Order_ID=?";
             PreparedStatement stmt = db.getPreparedStatement(sql);
             stmt.setInt(1, order.getPrice());
             stmt.setString(2, order.getDateTime());
-            stmt.setString(3, order.getItemName());
-            stmt.setInt(4, order.getCustomerID());
-            stmt.setInt(5, order.getID());
+            //stmt.setString(3, order.getItems());
+            stmt.setInt(4, order.getID());
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("An existing order was updated successfully!");
@@ -123,7 +121,7 @@ public class OrderDAO implements DAO<Order>
     public void delete(Order order) {
         DB db = DB.getInstance();
         try {
-            String sql = "DELETE FROM HD_Order WHERE Order_ID = ?";
+            String sql = "DELETE FROM ORDERS WHERE Order_ID = ?";
             PreparedStatement stmt = db.getPreparedStatement(sql);
             stmt.setInt(1, order.getID());
             int rowsDeleted = stmt.executeUpdate();
@@ -145,7 +143,7 @@ public class OrderDAO implements DAO<Order>
         ResultSet rs = null;
         List<String> headers = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM HD_Order WHERE Order_ID = -1";//We just need this sql query to get the column headers
+            String sql = "SELECT * FROM ORDERS WHERE Order_ID = -1";//We just need this sql query to get the column headers
             rs = db.executeQuery(sql);
             ResultSetMetaData rsmd = rs.getMetaData();
             //Get number of columns in the result set

@@ -1,4 +1,8 @@
 package entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Gokhan
@@ -8,16 +12,14 @@ public class Order
     private int ID;
     private int price;
     private String dateTime;
-    private String itemName;
-    private int customerID;
+    private List<Item> items;
 
-    public Order(int ID, int price, String dateTime, String itemName, int customerID)
+    public Order(int ID, int price, String dateTime)
     {
         this.ID = ID;
         this.price = price;
         this.dateTime = dateTime;
-        this.itemName = itemName;
-        this.customerID = customerID;
+        this.items = new ArrayList<>();
     }
 
     public int getID() {
@@ -32,16 +34,13 @@ public class Order
         return dateTime;
     }
 
-    public String getItemName() {
-        return itemName;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public int getCustomerID() {
-        return customerID;
-    }
 
     @Override
     public String toString() {
-        return "Order{" + "ID=" + ID + ", price=" + price + ", dateTime=" + dateTime + ", itemName=" + itemName + ", customerID=" + customerID + '}';
+        return "Order{" + "ID=" + ID + ", price=" + price + ", dateTime=" + dateTime + ", items=" + items + '}';
     }
 }

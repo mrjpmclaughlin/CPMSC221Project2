@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Tue Nov 11 20:36:00 EST 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019a-75b4-93bf-00000684f8c0 
+Sun Nov 16 23:12:24 EST 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-019a-9003-913e-000006860718 
 on database directory /Users/jpmclaughlin/IdeaProjects/Lab 9/JPMcLaughlinCMPSC221Project2/RestaurantDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@14dad5dc 
-Loaded from file:/Users/jpmclaughlin/Downloads/db-derby-10.17.1.0-bin/lib/derby.jar
+Loaded from file:/Users/jpmclaughlin/IdeaProjects/Lab%209/JPMcLaughlinCMPSC221Project2/lib/derby.jar
 java.vendor=Amazon.com Inc.
 java.runtime.version=25+36-LTS
 user.dir=/Users/jpmclaughlin/IdeaProjects/Lab 9/JPMcLaughlinCMPSC221Project2
